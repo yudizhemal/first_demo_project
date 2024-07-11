@@ -26,11 +26,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     // Change status bar color
     var canGoBack = Navigator.canPop(context);
     return AppBar(
-      backgroundColor: backgroundColor,
+      // backgroundColor: backgroundColor,
       leading: leading ??
           (canGoBack
               ? IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

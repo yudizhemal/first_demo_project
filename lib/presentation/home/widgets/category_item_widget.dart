@@ -15,7 +15,6 @@ class CategoryItemWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           print(category.id);
-          Get.toNamed('/add-list', arguments: { "id": category.id});
         },
         borderRadius: BorderRadius.circular(12),
         child: ListTile(

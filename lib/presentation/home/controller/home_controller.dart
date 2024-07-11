@@ -1,3 +1,4 @@
+import 'package:first_demo_project/Theme/Colors.dart';
 import 'package:get/get.dart';
 import '../models/category_model.dart';
 import 'package:uuid/uuid.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
   var categoryList = <CategoryModel>[].obs;
-  final Uuid uuid = Uuid();
+  final Uuid uuid = const Uuid();
 
   void addCategory(String name, String description) {
     final id = uuid.v4();
@@ -25,20 +26,20 @@ class HomeController extends GetxController {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Add Category',
+                  const Text('Add Category',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.error,
+                        color: primaryColor,
                       )),
                   IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      icon: Icon(Icons.close,
-                          color: Theme.of(context).colorScheme.error))
+                      icon: const Icon(Icons.close,
+                          color: primaryColor))
                 ],
               ),
-              Divider(
-                color: Theme.of(context).colorScheme.error,
+              const Divider(
+                color: primaryColor,
               ),
             ],
           ),
@@ -46,29 +47,24 @@ class HomeController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom: 12),
                 child: TextField(
                   onChanged: (value) {
                     categoryName = value;
                   },
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Category Name',
+                    hintText: 'Category Name',
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: TextField(
+              TextField(
                   onChanged: (value) {
                     categoryDescription = value;
                   },
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Category Description',
+                    hintText: 'Category Description',
                   ),
                 ),
-              ),
             ],
           ),
           actions: [

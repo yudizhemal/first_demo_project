@@ -1,3 +1,5 @@
+import 'package:first_demo_project/Theme/Colors.dart';
+
 import '../routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,23 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(color: Colors.grey, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(color: primaryColor, width: 2),
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: primaryColor,
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
