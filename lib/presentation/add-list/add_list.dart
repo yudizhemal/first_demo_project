@@ -1,3 +1,4 @@
+import 'package:first_demo_project/Theme/Colors.dart';
 import 'package:first_demo_project/widgets/CustomDropdown.dart';
 
 import '/widgets/CustomAppbar.dart';
@@ -13,48 +14,36 @@ class AddList extends StatelessWidget {
   Widget build(BuildContext context) {
     final AddListController controller = Get.put(AddListController());
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Add List',
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
+        appBar: CustomAppBar(
+          title: 'Add List',
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 12),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter Creator Name',
+              Container(
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  autofocus: true,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 12),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter Creator Mobile Number',
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 12),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter List Name',
-                  ),
-                ),
-              ),
-              CustomDropdown(
-                items: controller.categoryList.map((e) {
-                  return DropdownItem(value: e.id, name: e.name);
-                }).toList(),
-              ),
+                  child: Row(
+                    children: [
+                      const Text('Category: '),
+                      Expanded(
+                        child: TextField(
+                          onChanged: (value) {
+                            controller.onCategoryChange(value);
+                          },
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

@@ -18,17 +18,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(color: Colors.grey, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(color: primaryColor, width: 2),
-          ),
+          // hintStyle: TextStyle(
+          //   color: Colors.grey,
+          // ),
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.all(Radius.circular(10)),
+          // ),
+          // enabledBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.all(Radius.circular(10)),
+          //   borderSide: BorderSide(color: Colors.grey, width: 1),
+          // ),
+          // focusedBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.all(Radius.circular(10)),
+          //   borderSide: BorderSide(color: primaryColor, width: 2),
+          // ),
+          // contentPadding: EdgeInsets.symmetric(
+          //   horizontal: 12,
+          // ),
+          // constraints: BoxConstraints(
+          //   maxHeight: 44,
+          // ),
         ),
         appBarTheme: const AppBarTheme(
           backgroundColor: primaryColor,
