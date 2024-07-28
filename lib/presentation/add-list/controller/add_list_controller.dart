@@ -1,5 +1,6 @@
 import 'package:first_demo_project/presentation/add-list/models/listItem_model.dart';
 import 'package:first_demo_project/presentation/home/controller/home_controller.dart';
+import 'package:first_demo_project/widgets/CustomDropdown.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
@@ -24,8 +25,8 @@ class AddListController extends GetxController {
     super.onInit();
   }
 
-  void onCategoryChange(String value) {
-    categoryId = value;
+  void onCategoryChange(DropdownItem item) {
+    categoryId = item.value;
   }
 
   void onCreatorNameChange(String value) {

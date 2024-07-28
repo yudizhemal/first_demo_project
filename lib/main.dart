@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        scaffoldBackgroundColor: Colors.white,
         inputDecorationTheme: const InputDecorationTheme(
           // hintStyle: TextStyle(
           //   color: Colors.grey,

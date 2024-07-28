@@ -46,14 +46,20 @@ class HomeController extends GetxController {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: primaryColor),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   onChanged: (value) {
                     categoryName = value;
                   },
                   decoration: const InputDecoration(
                     hintText: 'Category Name',
+                    labelText: 'Category',
+                    border: InputBorder.none,
                   ),
                 ),
               ),

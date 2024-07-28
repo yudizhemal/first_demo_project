@@ -7,10 +7,7 @@ class DropdownItem {
   final String value;
   final String name;
 
-  DropdownItem({
-    required this.value,
-    required this.name,
-  });
+  DropdownItem({required this.value, required this.name});
 }
 
 class CustomDropdown extends StatefulWidget {
@@ -20,123 +17,142 @@ class CustomDropdown extends StatefulWidget {
   final String? hintText;
   final Color? borderColor;
   final Color? activeBorderColor;
-  final Color? textColor;
-  final Color? hintColor;
+  final Color textColor;
+  final Color hintColor;
   final Color? iconColor;
+  final String label;
+  final double? labelWidth;
 
   const CustomDropdown({
-    Key? key,
+    super.key,
     required this.items,
     this.initialValue,
     this.hintText,
     this.onChanged,
     this.borderColor,
     this.activeBorderColor,
-    this.textColor,
+    this.textColor = darkBlue,
+    this.hintColor = softBlue,
     this.iconColor,
-    this.hintColor,
-  }) : super(key: key);
+    required this.label,
+    this.labelWidth,
+  });
 
   @override
   _CustomDropdownState createState() => _CustomDropdownState();
 }
 
 class _CustomDropdownState extends State<CustomDropdown> {
-  late String? dropdownValue;
-  final FocusNode _focusNode = FocusNode();
-  late Color borderColor;
-  late Color activeBorderColor;
-  var borderSize = 1.0;
+  late String? _dropdownValue;
+  late Color _borderColor;
+  late Color _activeBorderColor;
+  bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
-    dropdownValue = widget.initialValue;
-    borderColor = widget.borderColor ?? Colors.grey;
-    activeBorderColor = widget.activeBorderColor ?? primaryColor;
-    _focusNode.addListener(() {
-      setState(() {
-        borderColor = _focusNode.hasFocus ? activeBorderColor : (widget.borderColor ?? Colors.grey);
-        borderSize = _focusNode.hasFocus ? 2.0 : 1.0;
-      });
-    });
+    _dropdownValue = widget.initialValue;
+    _borderColor = widget.borderColor ?? grey2;
+    _activeBorderColor = widget.activeBorderColor ?? secondaryColor;
   }
 
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
+  void _onFocusChange(bool focused) {
+    setState(() {
+      _isFocused = focused;
+      _borderColor =
+          focused ? _activeBorderColor : (widget.borderColor ?? grey2);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Focus(
-      focusNode: _focusNode,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: borderColor, width: borderSize),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton2(
-            isExpanded: true,
-            value: dropdownValue,
-            hint: Text(widget.hintText ?? 'Select', style: TextStyle(
-              color: widget.textColor ?? Colors.black,
-            )),
-            style: TextStyle(
-              color: widget.textColor ?? Colors.black,
-              fontSize: 16,
-            ),
-            items: widget.items.map((item) {
-              return DropdownMenuItem(
-                value: item.name,
-                child: Text(item.name, style: const TextStyle(
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black,
-                )),
-              );
-            }).toList(),
-            iconStyleData: const IconStyleData(icon: Icon(Icons.keyboard_arrow_down)),
-            dropdownStyleData: DropdownStyleData(
-              maxHeight: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                // color: primaryColor,
+      onFocusChange: _onFocusChange,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 4, bottom: 4),
+            child: Text(
+              widget.label,
+              style: TextStyle(
+                color: widget.textColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            customButton: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: _borderColor,
+              ),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton2(
+                isExpanded: true,
+                value: _dropdownValue,
+                items: widget.items
+                    .map((item) => DropdownMenuItem(
+                          value: item.name,
+                          child: Text(item.name,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: widget.textColor,
+                                  fontWeight: FontWeight.normal)),
+                        ))
+                    .toList(),
+                dropdownStyleData: DropdownStyleData(
+                  offset: const Offset(0, -10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                ),
+                onChanged: (String? newValue) {
+                  DropdownItem? selectedItem = widget.items
+                      .firstWhereOrNull((item) => item.name == newValue);
+                  setState(() {
+                    _dropdownValue = newValue;
+                    if (widget.onChanged != null && selectedItem != null) {
+                      widget.onChanged!(selectedItem);
+                    }
+                  });
+                },
+                customButton: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
                       child: Text(
-                        dropdownValue ?? widget.hintText ?? 'Select',
+                        _dropdownValue ?? widget.hintText ?? 'Select',
                         style: TextStyle(
-                          color: dropdownValue == null ? widget.hintColor ?? Colors.grey : widget.textColor ?? Colors.black,
+                          color: _dropdownValue == null
+                              ? widget.hintColor
+                              : widget.textColor,
                           fontSize: 16,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
-                  ),
-                  Icon(Icons.keyboard_arrow_down, color: widget.iconColor ?? Colors.black),
-                ],
+                    Icon(Icons.keyboard_arrow_down_rounded,
+                        color: _isFocused
+                            ? primaryColor
+                            : widget.iconColor ?? Colors.black),
+                  ],
+                ),
               ),
             ),
-            onChanged: (String? newValue) {
-              DropdownItem? selectedItem = widget.items.firstWhereOrNull((item) => item.name == newValue);
-              setState(() {
-                dropdownValue = newValue;
-                if (widget.onChanged != null && selectedItem != null) {
-                  widget.onChanged!(selectedItem);
-                }
-              });
-            },
           ),
-        ),
+        ],
       ),
     );
   }
