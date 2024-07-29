@@ -48,7 +48,7 @@ class AddList extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+                  color: backgroundColor3,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
@@ -105,8 +105,8 @@ class AddList extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: controller.addListItem,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: errorBackground,
-                                foregroundColor: errorTextColor,
+                                backgroundColor: backgroundColor3,
+                                foregroundColor: darkBlue,
                                 minimumSize: const Size(double.infinity, 40),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -121,7 +121,7 @@ class AddList extends StatelessWidget {
                               onPressed: controller.addListItem,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: primaryColor,
-                                foregroundColor: Colors.white,
+                                foregroundColor: backgroundColor3,
                                 minimumSize: const Size(double.infinity, 40),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),

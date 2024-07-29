@@ -1,3 +1,4 @@
+import 'package:first_demo_project/Theme/Colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -30,7 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading ??
           (canGoBack
               ? IconButton(
-                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back_ios, color: lightTextColor),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -39,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: titleWidget ?? Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
+                color: lightTextColor,
               ),
             ),
       centerTitle: true,

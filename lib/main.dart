@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(seedColor: backgroundColor3),
+        scaffoldBackgroundColor: backgroundColor3,
         inputDecorationTheme: const InputDecorationTheme(
           // hintStyle: TextStyle(
           //   color: Colors.grey,
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: const AppBarTheme(
           backgroundColor: primaryColor,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: lightTextColor),
         ),
         useMaterial3: true,
       ),

@@ -106,7 +106,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 dropdownStyleData: DropdownStyleData(
                   offset: const Offset(0, -10),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: backgroundColor3,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(

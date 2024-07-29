@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // Primary Colors
 const primaryColor = Color(0xff2A6FFF); // dodgerBlue
+const lightTextColor = Color(0xffF7F7FA); // zircon
 
 // Secondary Colors
 const secondaryColor = Color(0xff61A4FF); // malibu
