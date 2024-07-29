@@ -1,33 +1,32 @@
 import 'package:first_demo_project/Theme/Colors.dart';
+import 'package:first_demo_project/presentation/units/models/unit_model.dart';
 import 'package:first_demo_project/widgets/CustomTextField.dart';
-import 'package:get/get.dart';
-import '../models/category_model.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
-class HomeController extends GetxController {
-  var categoryList = <CategoryModel>[].obs;
+class UnitsController extends GetxController {
+  var unitList = <UnitModel>[].obs;
   final Uuid uuid = const Uuid();
 
-  void addCategory(String name, String description) {
+  void addUnit(String name) {
     final id = uuid.v4();
-    categoryList
-        .add(CategoryModel(id: id, name: name, description: description));
+    unitList
+        .add(UnitModel(id: id, name: name));
   }
 
-  void showAddCategoryDialog(BuildContext context) {
+  void showAddUnitDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        String categoryName = '';
-        String categoryDescription = '';
+        String unitName = '';
         return AlertDialog(
           title: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Add Category',
+                  const Text('Add Unit',
                       style: TextStyle(
                         color: grey1,
                       )),
@@ -49,20 +48,13 @@ class HomeController extends GetxController {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextField(
-                    value: categoryName,
-                    label: 'Category',
-                    hintText: 'Category Name',
+                    value: unitName,
+                    label: 'Unit',
+                    hintText: 'Unit Name',
                     onTextChanged: (value) {
-                      categoryName = value;
+                      unitName = value;
                     }),
                 const SizedBox(height: 10),
-                CustomTextField(
-                    value: categoryDescription,
-                    label: 'Description',
-                    hintText: 'Category Description',
-                    onTextChanged: (value) {
-                      categoryDescription = value;
-                    }),
               ],
             ),
           ),
@@ -70,10 +62,10 @@ class HomeController extends GetxController {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                if (categoryName.isEmpty || categoryDescription.isEmpty) {
+                if (unitName.isEmpty) {
                   return;
                 }
-                addCategory(categoryName, categoryDescription);
+                addUnit(unitName);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,

@@ -8,9 +8,10 @@
   import 'widgets/category_item_widget.dart';
 
   class HomeScreen extends StatelessWidget {
+    final HomeController controller = Get.find();
+
     @override
     Widget build(BuildContext context) {
-      final HomeController controller = Get.put(HomeController());
 
       return Scaffold(
           appBar: CustomAppBar(
@@ -64,6 +65,13 @@
                 foregroundColor: lightTextColor,
                 label: 'Category',
                 onTap: () => controller.showAddCategoryDialog(context),
+              ),
+              SpeedDialChild(
+                child: const Icon(Icons.scale_rounded),
+                backgroundColor: successText,
+                foregroundColor: lightTextColor,
+                label: 'Units',
+                onTap: () => Get.toNamed(AppRoutes.units),
               ),
             ],
           ));

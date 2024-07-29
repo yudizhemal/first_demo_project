@@ -1,5 +1,5 @@
 import 'package:first_demo_project/Theme/Colors.dart';
-
+import 'package:first_demo_project/presentation/add-list/binding/add_list_binding.dart';
 import '../routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,28 +18,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: backgroundColor3),
         scaffoldBackgroundColor: backgroundColor3,
-        inputDecorationTheme: const InputDecorationTheme(
-          // hintStyle: TextStyle(
-          //   color: Colors.grey,
-          // ),
-          // border: OutlineInputBorder(
-          //   borderRadius: BorderRadius.all(Radius.circular(10)),
-          // ),
-          // enabledBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.all(Radius.circular(10)),
-          //   borderSide: BorderSide(color: Colors.grey, width: 1),
-          // ),
-          // focusedBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.all(Radius.circular(10)),
-          //   borderSide: BorderSide(color: primaryColor, width: 2),
-          // ),
-          // contentPadding: EdgeInsets.symmetric(
-          //   horizontal: 12,
-          // ),
-          // constraints: BoxConstraints(
-          //   maxHeight: 44,
-          // ),
-        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: primaryColor,
           iconTheme: IconThemeData(color: lightTextColor),
@@ -48,6 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.initialRoute,
+      initialBinding:AddListBinding(),
       getPages: AppRoutes.pages,
     );
   }

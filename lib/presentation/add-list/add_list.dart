@@ -1,4 +1,5 @@
 import 'package:first_demo_project/Theme/Colors.dart';
+import 'package:first_demo_project/presentation/add-list/widgets/list_item_widget.dart';
 import 'package:first_demo_project/widgets/CustomDropdown.dart';
 import 'package:first_demo_project/widgets/CustomTextField.dart';
 
@@ -10,12 +11,12 @@ import 'package:get/get.dart';
 class AddList extends StatelessWidget {
   // List of items in our dropdown menu
   AddList({super.key});
-
-  final AddListController controller = Get.put(AddListController());
+  final AddListController controller = Get.find()..getData();
 
   @override
   Widget build(BuildContext context) {
-    final AddListController controller = Get.put(AddListController());
+
+
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Add List',
@@ -43,6 +44,24 @@ class AddList extends StatelessWidget {
                 onChanged: controller.onCategoryChange,
               ),
               Container(
+                padding: const EdgeInsets.all(8),
+                child: Obx(
+                  () {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.listItem.length,
+                      itemBuilder: (context, index) {
+                        final item = controller.listItem[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: ListItemWidget(listItem: item),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              Container(
                 margin: const EdgeInsets.only(
                     top: 18, left: 8, right: 8, bottom: 8),
                 padding: const EdgeInsets.all(12),
@@ -64,10 +83,10 @@ class AddList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: CustomTextField(
-                        value: controller.creatorName,
+                        value: controller.item,
                         label: "Item",
                         hintText: "Enter item name",
-                        onTextChanged: controller.onCreatorNameChange,
+                        onTextChanged: controller.onItemChange,
                       ),
                     ),
                     Padding(
@@ -76,22 +95,21 @@ class AddList extends StatelessWidget {
                         children: [
                           Expanded(
                             child: CustomTextField(
-                              value: controller.creatorMobileNumber,
+                              value: controller.quantity,
                               label: "Quantity",
                               hintText: "Enter quantity",
-                              onTextChanged:
-                                  controller.onCreatorMobileNumberChange,
+                              onTextChanged: controller.onQuantityChange,
                             ),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: CustomDropdown(
-                              items: controller.categoryList
+                              items: controller.unitList
                                   .map((e) =>
                                       DropdownItem(value: e.id, name: e.name))
                                   .toList(),
                               label: "Unit",
-                              onChanged: controller.onCategoryChange,
+                              onChanged: controller.onUnitChange,
                             ),
                           )
                         ],
@@ -103,7 +121,7 @@ class AddList extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: controller.addListItem,
+                              onPressed: controller.cancelAddList,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: backgroundColor3,
                                 foregroundColor: darkBlue,

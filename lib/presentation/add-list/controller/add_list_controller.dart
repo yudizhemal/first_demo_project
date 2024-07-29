@@ -1,5 +1,6 @@
 import 'package:first_demo_project/presentation/add-list/models/listItem_model.dart';
 import 'package:first_demo_project/presentation/home/controller/home_controller.dart';
+import 'package:first_demo_project/presentation/units/controller/units_controller.dart';
 import 'package:first_demo_project/widgets/CustomDropdown.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -7,8 +8,10 @@ import 'package:uuid/uuid.dart';
 class AddListController extends GetxController {
   final Uuid uuid = const Uuid();
   late HomeController homeController;
+  late UnitsController unitsController;
   late List categoryList;
-  var listItem = <ListItemModel>[];
+  late List unitList;
+  var listItem = <ListItemModel>[].obs;
   var creatorName = '';
   var creatorMobileNumber = '';
   var listName = '';
@@ -18,15 +21,21 @@ class AddListController extends GetxController {
   var quantity = '';
   var unit = '';
 
-  @override
-  void onInit() {
+
+
+  getData(){
     homeController = Get.find();
     categoryList = homeController.categoryList.toList();
-    super.onInit();
+    unitsController = Get.find();
+    unitList = unitsController.unitList.toList();
   }
 
   void onCategoryChange(DropdownItem item) {
     categoryId = item.value;
+  }
+
+  void onUnitChange(DropdownItem item) {
+    unit = item.value;
   }
 
   void onCreatorNameChange(String value) {
@@ -41,6 +50,14 @@ class AddListController extends GetxController {
     listName = value;
   }
 
+  void onItemChange(String value) {
+    item = value;
+  }
+
+  void onQuantityChange(String value) {
+    quantity = value;
+  }
+
   void addListItem() {
     final id = uuid.v4();
     listItem
@@ -52,6 +69,5 @@ class AddListController extends GetxController {
     creatorMobileNumber = '';
     listName = '';
     categoryId = '';
-    listItem = [];
   }
 }
